@@ -4,36 +4,39 @@ import {alertaSucess, alertaError, alertaWarning} from "../alertas.js";
 import Swal from "sweetalert2";
 
 const useEmpleado = () => {
-    const [products, setProducts] = useState([])
+    const [empleados, setEmpleados] = useState([])
     const [id, setId] = useState('')
-    const [name, setName] = useState('')
+    const [nombre, setNombre] = useState('')
+    const [dni, setDni] = useState('')
     const [email, setEmail] = useState('')
     const [titleModal, setTitleModal] = useState('')
-    const [role, setRole] = useState('')
+    const [direccion, setDireccion] = useState('')
     const [operation, setOperation] = useState('')
-    const url='https://api.escuelajs.co/api/v1/users'
+    const url='https://674c84c054e1fca9290cd05f.mockapi.io/api/examen/empleado'
 
 
-    const getProducts = async () => {
+    const getEmpleados = async () => {
         const response = await axios.get(url)
-        setProducts(response.data)
+        setEmpleados(response.data)
 
     }
 
-    const openModal = (operation, product) => {
+    const openModal = (operation, empleado) => {
         setId('')
-        setName('')
+        setNombre('')
+        setDni('')
         setEmail('')
-        setRole('')
+        setDireccion('')
 
         if (operation === 1) {
             setTitleModal('Registrar Empleado')
         }else if (operation === 2) {
             setTitleModal('Editar Empleado')
-            setId(product.id)
-            setName(product.name)
-            setEmail(product.email)
-            setRole(product.role)
+            setId(empleado.id)
+            setNombre(empleado.nombre)
+            setDni(empleado.dni)
+            setEmail(empleado.email)
+            setDireccion(empleado.address)
         }
 
         setOperation(operation)
@@ -55,15 +58,15 @@ const useEmpleado = () => {
         await axios(obj).then(()=>{
             let mensaje = ""
             if (metodo=='POST') {
-                mensaje = "Se guardo el producto"
+                mensaje = "Se guardo el Empleado"
             }else if (metodo=='PUT') {
-                mensaje = "Se edito el producto"
+                mensaje = "Se edito el Empleado"
             }else if (metodo=='DELETE') {
-                mensaje = "Se elimino el producto"
+                mensaje = "Se elimino el Empleado"
             }
             alertaSucess(mensaje)
             document.getElementById("btnCerrarModal").click()
-            getProducts()
+            getEmpleados()
         }).catch(error=>{
             alertaError(error.response.data.message)
         })
@@ -72,22 +75,25 @@ const useEmpleado = () => {
 
 
 
-    const guardarEditarProducto = () => {
+    const guardarEditarEmpleado = () => {
         let payload,metodo,urlAxios
 
-        if (name ==='') {
-            alertaWarning('Nombre en blanco',name)
+        if (nombre ==='') {
+            alertaWarning('Nombre en blanco',nombre)
+        }else if(dni ==='') {
+            alertaWarning('Dni en blanco')
         }
         else if(email ==='') {
             alertaWarning('Email en blanco')
         }
-        else if(role === '') {
-            alertaWarning('Role en blanco')
+        else if(direccion === '') {
+            alertaWarning('Direccion en blanco')
         }else{
             payload={
-                name:name,
+                nombre:nombre,
+                dni:dni,
+                direccion:address,
                 email:email,
-                role:role,
                 password:12345,
                 avatar: "https://i.imgur.com/LDOO4Qs.jpg",
                 categoryId:1,
@@ -106,9 +112,9 @@ const useEmpleado = () => {
     }
 
 
-    const deleteProducto = async(id) => {
+    const deleteEmpleado = async(id) => {
         Swal.fire({
-            title:"Esta seguro de eliminar el producto?",
+            title:"Esta seguro de eliminar el Empleado?",
             icon: "question",
             text:"No habra marcha atras",
             showCancelButton: true,
@@ -125,20 +131,22 @@ const useEmpleado = () => {
     }
 
     return {
-        products,
-        getProducts,
+        empleados,
+        getEmpleados,
         openModal,
         id,
         setId,
-        name,
-        setName,
+        nombre,
+        setNombre,
+        dni,
+        setDni,
         email,
         setEmail,
-        role,
-        setRole,
+        direccion,
+        setDireccion,
         titleModal,
-        guardarEditarProducto,
-        deleteProducto,
+        guardarEditarEmpleado,
+        deleteEmpleado,
     }
 
 

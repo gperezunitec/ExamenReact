@@ -6,24 +6,26 @@ import {toFormData} from "axios";
 export const Empleado = () => {
 
     const {
-        products,
-        getProducts,
+        empleados,
+        getEmpleados,
         openModal,
         id,
         setId,
-        name,
-        setName,
+        nombre,
+        setNombre,
+        dni,
+        setDni,
         email,
         setEmail,
-        role,
-        setRole,
+        direccion,
+        setDireccion,
         titleModal,
-        guardarEditarProducto,
-        deleteProducto,
+        guardarEditarEmpleado,
+        deleteEmpleado,
     }=useEmpleado();
 
     useEffect(() => {
-        getProducts();
+        getEmpleados();
 
     },[])
 
@@ -36,9 +38,9 @@ export const Empleado = () => {
                     <div className="col-md-4 offset-md-4">
                         <div className="d-grid mx-auto">
 
-                            <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducto"
+                            <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEmpleado"
                                     onClick={() => openModal(1)}>
-                                <i className="fa-solid fa-circle-plus"></i>Crear Producto
+                                <i className="fa-solid fa-circle-plus"></i>Crear Empleado
                             </button>
                         </div>
                     </div>
@@ -52,26 +54,28 @@ export const Empleado = () => {
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
+                                <th>Dni</th>
                                 <th>Email</th>
-                                <th>Roles</th>
+                                <th>Direccion</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
                             <tbody className="table-group-divider">
 
                             {
-                                products.map((product,i) => (
-                                    <tr key={product.id}>
+                                empleados.map((empleado,i) => (
+                                    <tr key={empleado.id}>
                                         <td>{i+1}</td>
-                                        <td>{product.name}</td>
-                                        <td>{product.email}</td>
-                                        <td>{product.role}</td>
+                                        <td>{empleado.nombre}</td>
+                                        <td>{empleado.dni}</td>
+                                        <td>{empleado.email}</td>
+                                        <td>{empleado.role}</td>
                                         <td>
-                                            <button className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalProducto"
-                                                    onClick={() => openModal(2,product)}>
+                                            <button className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEmpleado"
+                                                    onClick={() => openModal(2,empleado)}>
                                                 <i className="fa-solid fa-edit"></i>
                                             </button>
-                                            <button className="btn btn-danger" onClick={() => deleteProducto(product.id)}>
+                                            <button className="btn btn-danger" onClick={() => deleteEmpleado(empleado.id)}>
                                                 <i className="fa-solid fa-trash"></i>
                                             </button>
                                         </td>
@@ -90,7 +94,7 @@ export const Empleado = () => {
                 </div>
 
 
-                <div id="modalProducto" className="modal fade" aria-hidden="true" tabIndex={-1}>
+                <div id="modalEmpleado" className="modal fade" aria-hidden="true" tabIndex={-1}>
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -99,14 +103,15 @@ export const Empleado = () => {
                             <div className="modal-body">
 
 
-                                <Entrada id="nombre" iconName="fa-solid fa-gift" inputType="text" placeholder="Nombre" value={name} onChange={(e)=>setName(e.target.value)}></Entrada>
+                                <Entrada id="nombre" iconName="fa-solid fa-gift" inputType="text" placeholder="Nombre" value={nombre} onChange={(e)=>setNombre(e.target.value)}></Entrada>
+                                <Entrada id="dni" iconName="fa-solid fa-gift" inputType="text" placeholder="Dni" value={dni} onChange={(e)=>setDni(e.target.value)}></Entrada>
                                 <Entrada id="email" iconName="fa-solid fa-comments" inputType="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}></Entrada>
-                                <Entrada id="role" iconName="fa-solid fa-dollar-sign" inputType="text" placeholder="Role" value={role} onChange={(e)=>setRole(e.target.value)}></Entrada>
+                                <Entrada id="role" iconName="fa-solid fa-dollar-sign" inputType="text" placeholder="Direccion" value={direccion} onChange={(e)=>setDireccion(e.target.value)}></Entrada>
 
 
                             </div>
                             <div className="modal-footer">
-                                <button className="btn btn-success" onClick={()=>guardarEditarProducto()}><i className="fa-solid fa-floppy-disk"></i>Guardar</button>
+                                <button className="btn btn-success" onClick={()=>guardarEditarEmpleado()}><i className="fa-solid fa-floppy-disk"></i>Guardar</button>
                                 <button id="btnCerrarModal" className="btn btn-danger" data-bs-dismiss="modal"><i className="fa-solid fa-circle-xmark"></i>Cerrar</button>
                             </div>
 
