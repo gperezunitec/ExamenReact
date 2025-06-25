@@ -57,7 +57,7 @@ export const Empleado = () => {
                                 <th>Dni</th>
                                 <th>Email</th>
                                 <th>Direccion</th>
-                                <th>Acciones</th>
+
                             </tr>
                             </thead>
                             <tbody className="table-group-divider">
@@ -69,16 +69,8 @@ export const Empleado = () => {
                                         <td>{empleado.nombre}</td>
                                         <td>{empleado.dni}</td>
                                         <td>{empleado.email}</td>
-                                        <td>{empleado.role}</td>
-                                        <td>
-                                            <button className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEmpleado"
-                                                    onClick={() => openModal(2,empleado)}>
-                                                <i className="fa-solid fa-edit"></i>
-                                            </button>
-                                            <button className="btn btn-danger" onClick={() => deleteEmpleado(empleado.id)}>
-                                                <i className="fa-solid fa-trash"></i>
-                                            </button>
-                                        </td>
+                                        <td>{empleado.direccion}</td>
+
                                     </tr>
 
                                 ))
@@ -103,10 +95,10 @@ export const Empleado = () => {
                             <div className="modal-body">
 
 
-                                <Entrada id="nombre" iconName="fa-solid fa-gift" inputType="text" placeholder="Nombre" value={nombre} onChange={(e)=>setNombre(e.target.value)}></Entrada>
-                                <Entrada id="dni" iconName="fa-solid fa-gift" inputType="text" placeholder="Dni" value={dni} onChange={(e)=>setDni(e.target.value)}></Entrada>
-                                <Entrada id="email" iconName="fa-solid fa-comments" inputType="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}></Entrada>
-                                <Entrada id="role" iconName="fa-solid fa-dollar-sign" inputType="text" placeholder="Direccion" value={direccion} onChange={(e)=>setDireccion(e.target.value)}></Entrada>
+                                <Entrada id="nombre" iconName="fa-solid fa-address-book" inputType="text" placeholder="Nombre" value={nombre} onChange={(e)=>setNombre(e.target.value)}></Entrada>
+                                <Entrada id="dni" iconName="fa-solid fa-id-card" inputType="text" placeholder="Dni" value={dni} onChange={(e)=>setDni(e.target.value)}></Entrada>
+                                <Entrada id="email" iconName="fa-solid fa-envelope" inputType="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}></Entrada>
+                                <Entrada id="role" iconName="fa-solid fa-map-marker" inputType="text" placeholder="Direccion" value={direccion} onChange={(e)=>setDireccion(e.target.value)}></Entrada>
 
 
                             </div>

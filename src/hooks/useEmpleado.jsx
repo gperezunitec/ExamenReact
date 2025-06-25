@@ -36,7 +36,7 @@ const useEmpleado = () => {
             setNombre(empleado.nombre)
             setDni(empleado.dni)
             setEmail(empleado.email)
-            setDireccion(empleado.address)
+            setDireccion(empleado.direccion)
         }
 
         setOperation(operation)
@@ -92,7 +92,7 @@ const useEmpleado = () => {
             payload={
                 nombre:nombre,
                 dni:dni,
-                direccion:address,
+                direccion:direccion,
                 email:email,
                 password:12345,
                 avatar: "https://i.imgur.com/LDOO4Qs.jpg",
